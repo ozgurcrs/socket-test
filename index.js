@@ -1,7 +1,10 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import dotenv from "dotenv";
 import cors from "cors";
+
+dotenv.config();
 
 const app = express();
 const server = createServer(app);
@@ -13,8 +16,13 @@ const io = new Server(server, {
 
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.json("Hello World");
+});
+
 io.on("connection", (socket) => {
   socket.on("roomId", (room) => {
+    console.log("connected");
     socket.join(room);
   });
 
@@ -25,10 +33,6 @@ io.on("connection", (socket) => {
 
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3000;
-
-server.listen(PORT, () => {
-  console.log(`Server is running ${PORT}`);
-});
 
 server.listen(PORT, () => {
   console.log(`Server is running ${PORT}`);
