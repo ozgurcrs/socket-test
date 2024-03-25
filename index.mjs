@@ -23,7 +23,12 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = 3000;
+// eslint-disable-next-line no-undef
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => {
+  console.log(`Server is running ${PORT}`);
+});
 
 server.listen(PORT, () => {
   console.log(`Server is running ${PORT}`);
