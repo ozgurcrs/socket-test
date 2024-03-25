@@ -22,7 +22,6 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   socket.on("roomId", (room) => {
-    console.log("connected");
     socket.join(room);
   });
 
